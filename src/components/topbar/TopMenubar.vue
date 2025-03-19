@@ -12,7 +12,6 @@
     </div>
     <div class="comfyui-menu-right flex-shrink-0" ref="menuRight"></div>
     <Actionbar />
-    <BottomPanelToggleButton class="flex-shrink-0" />
     <Button
       class="flex-shrink-0"
       icon="pi pi-bars"
@@ -42,7 +41,6 @@ import Button from 'primevue/button'
 import { computed, onMounted, provide, ref } from 'vue'
 
 import Actionbar from '@/components/actionbar/ComfyActionbar.vue'
-import BottomPanelToggleButton from '@/components/topbar/BottomPanelToggleButton.vue'
 import CommandMenubar from '@/components/topbar/CommandMenubar.vue'
 import WorkflowTabs from '@/components/topbar/WorkflowTabs.vue'
 import { app } from '@/scripts/app'

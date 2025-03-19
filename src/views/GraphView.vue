@@ -54,7 +54,6 @@ import { useServerConfigStore } from '@/stores/serverConfigStore'
 import { useSettingStore } from '@/stores/settingStore'
 import { useBottomPanelStore } from '@/stores/workspace/bottomPanelStore'
 import { useColorPaletteStore } from '@/stores/workspace/colorPaletteStore'
-import { useSidebarTabStore } from '@/stores/workspace/sidebarTabStore'
 import { useWorkspaceStore } from '@/stores/workspaceStore'
 import { electronAPI, isElectron } from '@/utils/envUtil'
 
@@ -157,7 +156,6 @@ const init = () => {
   useCommandStore().registerCommands(coreCommands)
   useMenuItemStore().registerCoreMenuCommands()
   useKeybindingService().registerCoreKeybindings()
-  useSidebarTabStore().registerCoreSidebarTabs()
   useBottomPanelStore().registerCoreBottomPanelTabs()
   app.extensionManager = useWorkspaceStore()
 }

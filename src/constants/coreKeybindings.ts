@@ -11,14 +11,6 @@ export const CORE_KEYBINDINGS: Keybinding[] = [
   {
     combo: {
       ctrl: true,
-      shift: true,
-      key: 'Enter'
-    },
-    commandId: 'Comfy.QueuePromptFront'
-  },
-  {
-    combo: {
-      ctrl: true,
       alt: true,
       key: 'Enter'
     },

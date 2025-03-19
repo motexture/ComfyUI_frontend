@@ -297,16 +297,6 @@ export function useCoreCommands(): ComfyCommand[] {
       }
     },
     {
-      id: 'Comfy.QueuePromptFront',
-      icon: 'pi pi-play',
-      label: 'Queue Prompt (Front)',
-      versionAdded: '1.3.7',
-      function: () => {
-        const batchCount = useQueueSettingsStore().batchCount
-        app.queuePrompt(-1, batchCount)
-      }
-    },
-    {
       id: 'Comfy.ShowSettingsDialog',
       icon: 'pi pi-cog',
       label: 'Show Settings Dialog',

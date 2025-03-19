@@ -10,16 +10,13 @@
       data-testid="queue-button"
       v-tooltip.bottom="{
         value: workspaceStore.shiftDown
-          ? $t('menu.runWorkflowFront')
+          ? $t('menu.runWorkflow')
           : $t('menu.runWorkflow'),
         showDelay: 600
       }"
     >
       <template #icon>
-        <i-lucide:list-start v-if="workspaceStore.shiftDown" />
-        <i-lucide:play v-else-if="queueMode === 'disabled'" />
-        <i-lucide:fast-forward v-else-if="queueMode === 'instant'" />
-        <i-lucide:step-forward v-else-if="queueMode === 'change'" />
+        <i-lucide:play v-if="queueMode === 'disabled'" />
       </template>
       <template #item="{ item }">
         <Button
@@ -35,66 +32,26 @@
         />
       </template>
     </SplitButton>
-    <BatchCountEdit />
-    <ButtonGroup class="execution-actions flex flex-nowrap">
-      <Button
-        v-tooltip.bottom="{
-          value: $t('menu.interrupt'),
-          showDelay: 600
-        }"
-        icon="pi pi-times"
-        :severity="executingPrompt ? 'danger' : 'secondary'"
-        :disabled="!executingPrompt"
-        text
-        :aria-label="$t('menu.interrupt')"
-        @click="() => commandStore.execute('Comfy.Interrupt')"
-      >
-      </Button>
-      <Button
-        v-tooltip.bottom="{
-          value: $t('sideToolbar.queueTab.clearPendingTasks'),
-          showDelay: 600
-        }"
-        icon="pi pi-stop"
-        :severity="hasPendingTasks ? 'danger' : 'secondary'"
-        :disabled="!hasPendingTasks"
-        text
-        :aria-label="$t('sideToolbar.queueTab.clearPendingTasks')"
-        @click="
-          () => {
-            if (queueCountStore.count.value > 1) {
-              commandStore.execute('Comfy.ClearPendingTasks')
-            }
-            queueMode = 'disabled'
-          }
-        "
-      />
-    </ButtonGroup>
   </div>
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import Button from 'primevue/button'
-import ButtonGroup from 'primevue/buttongroup'
 import SplitButton from 'primevue/splitbutton'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import { useCommandStore } from '@/stores/commandStore'
-import {
-  useQueuePendingTaskCountStore,
-  useQueueSettingsStore
-} from '@/stores/queueStore'
+import { useQueueSettingsStore } from '@/stores/queueStore'
 import { useWorkspaceStore } from '@/stores/workspaceStore'
 
-import BatchCountEdit from './BatchCountEdit.vue'
-
 const workspaceStore = useWorkspaceStore()
-const queueCountStore = storeToRefs(useQueuePendingTaskCountStore())
 const { mode: queueMode } = storeToRefs(useQueueSettingsStore())
 
 const { t } = useI18n()
+
+// Only the 'disabled' key is defined.
 const queueModeMenuItemLookup = computed(() => ({
   disabled: {
     key: 'disabled',
@@ -103,43 +60,34 @@ const queueModeMenuItemLookup = computed(() => ({
     command: () => {
       queueMode.value = 'disabled'
     }
-  },
-  instant: {
-    key: 'instant',
-    label: `${t('menu.run')} (${t('menu.instant')})`,
-    tooltip: t('menu.instantTooltip'),
-    command: () => {
-      queueMode.value = 'instant'
-    }
-  },
-  change: {
-    key: 'change',
-    label: `${t('menu.run')} (${t('menu.onChange')})`,
-    tooltip: t('menu.onChangeTooltip'),
-    command: () => {
-      queueMode.value = 'change'
-    }
   }
 }))
 
-const activeQueueModeMenuItem = computed(
-  () => queueModeMenuItemLookup.value[queueMode.value]
-)
+const activeQueueModeMenuItem = computed(() => {
+  // Assert that lookup can be indexed with any string.
+  const lookup = queueModeMenuItemLookup.value as Record<
+    string,
+    { key: string; label: string; tooltip: string; command: () => void }
+  >
+  // If the current queueMode key isn't found, fall back to 'disabled'.
+  return lookup[queueMode.value] || lookup.disabled
+})
+
 const queueModeMenuItems = computed(() =>
   Object.values(queueModeMenuItemLookup.value)
 )
 
-const executingPrompt = computed(() => !!queueCountStore.count.value)
-const hasPendingTasks = computed(
-  () => queueCountStore.count.value > 1 || queueMode.value !== 'disabled'
-)
+// The following computed properties are not used in the template.
+// Remove or uncomment them if needed.
+// const executingPrompt = computed(() => !!queueCountStore.count.value)
+// const hasPendingTasks = computed(
+//   () => queueCountStore.count.value > 1 || queueMode.value !== 'disabled'
+// )
 
 const commandStore = useCommandStore()
 const queuePrompt = (e: Event) => {
   const commandId =
-    'shiftKey' in e && e.shiftKey
-      ? 'Comfy.QueuePromptFront'
-      : 'Comfy.QueuePrompt'
+    'shiftKey' in e && e.shiftKey ? 'Comfy.QueuePrompt' : 'Comfy.QueuePrompt'
   commandStore.execute(commandId)
 }
 </script>
