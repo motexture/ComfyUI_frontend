@@ -272,9 +272,10 @@ export const CORE_SETTINGS: SettingParams[] = [
       { value: 'ru', text: 'Русский' },
       { value: 'ja', text: '日本語' },
       { value: 'ko', text: '한국어' },
-      { value: 'fr', text: 'Français' }
+      { value: 'fr', text: 'Français' },
+      { value: 'it', text: 'Italiano' }
     ],
-    defaultValue: () => navigator.language.split('-')[0] || 'en'
+    defaultValue: () => 'it'
   },
   {
     id: 'Comfy.NodeBadge.NodeSourceBadgeMode',

@@ -1,0 +1,210 @@
+{
+  "Comfy-Desktop_Folders_OpenCustomNodesFolder": {
+    "label": "Apri la cartella dei nodi personalizzati"
+  },
+  "Comfy-Desktop_Folders_OpenInputsFolder": {
+    "label": "Apri Cartella Input"
+  },
+  "Comfy-Desktop_Folders_OpenLogsFolder": {
+    "label": "Apri Cartella Log"
+  },
+  "Comfy-Desktop_Folders_OpenModelConfig": {
+    "label": "Apri extra_model_paths.yaml"
+  },
+  "Comfy-Desktop_Folders_OpenModelsFolder": {
+    "label": "Apri Cartella Modelli"
+  },
+  "Comfy-Desktop_Folders_OpenOutputsFolder": {
+    "label": "Apri la cartella degli output"
+  },
+  "Comfy-Desktop_OpenDevTools": {
+    "label": "Apri DevTools"
+  },
+  "Comfy-Desktop_OpenUserGuide": {
+    "label": "Guida utente desktop"
+  },
+  "Comfy-Desktop_Quit": {
+    "label": "Esci"
+  },
+  "Comfy-Desktop_Reinstall": {
+    "label": "Reinstalla"
+  },
+  "Comfy-Desktop_Restart": {
+    "label": "Riavvia"
+  },
+  "Comfy_BrowseTemplates": {
+    "label": "Sfoglia Modelli"
+  },
+  "Comfy_Canvas_DeleteSelectedItems": {
+    "label": "Elimina gli elementi selezionati"
+  },
+  "Comfy_Canvas_FitView": {
+    "label": "Adatta vista ai nodi selezionati"
+  },
+  "Comfy_Canvas_ResetView": {
+    "label": "Reimposta Vista"
+  },
+  "Comfy_Canvas_ToggleLinkVisibility": {
+    "label": "Attiva/Disattiva Visibilità Collegamento Canvas"
+  },
+  "Comfy_Canvas_ToggleLock": {
+    "label": "Blocco alternato della tela"
+  },
+  "Comfy_Canvas_ToggleSelectedNodes_Bypass": {
+    "label": "Bypass/Non bypass nodi selezionati"
+  },
+  "Comfy_Canvas_ToggleSelectedNodes_Collapse": {
+    "label": "Comprimi/Espandi Nodi Selezionati"
+  },
+  "Comfy_Canvas_ToggleSelectedNodes_Mute": {
+    "label": "Silenzia/Attiva audio nodi selezionati"
+  },
+  "Comfy_Canvas_ToggleSelectedNodes_Pin": {
+    "label": "Fissa/Sfissa nodi selezionati"
+  },
+  "Comfy_Canvas_ToggleSelected_Pin": {
+    "label": "Fissa/Sblocca Elementi Selezionati"
+  },
+  "Comfy_Canvas_ZoomIn": {
+    "label": "Ingrandisci"
+  },
+  "Comfy_Canvas_ZoomOut": {
+    "label": "Riduci"
+  },
+  "Comfy_ClearPendingTasks": {
+    "label": "Cancella Attività in Sospeso"
+  },
+  "Comfy_ClearWorkflow": {
+    "label": "Cancella Flusso di Lavoro"
+  },
+  "Comfy_DuplicateWorkflow": {
+    "label": "Duplica il flusso di lavoro corrente"
+  },
+  "Comfy_ExportWorkflow": {
+    "label": "Esporta Workflow"
+  },
+  "Comfy_ExportWorkflowAPI": {
+    "label": "Esporta flusso di lavoro (Formato API)"
+  },
+  "Comfy_Feedback": {
+    "label": "Fornisci Feedback"
+  },
+  "Comfy_Graph_FitGroupToContents": {
+    "label": "Adatta il Gruppo ai Contenuti"
+  },
+  "Comfy_Graph_GroupSelectedNodes": {
+    "label": "Raggruppa nodi selezionati"
+  },
+  "Comfy_GroupNode_ConvertSelectedNodesToGroupNode": {
+    "label": "Converti i nodi selezionati in un nodo gruppo"
+  },
+  "Comfy_GroupNode_ManageGroupNodes": {
+    "label": "Gestisci i nodi di gruppo"
+  },
+  "Comfy_GroupNode_UngroupSelectedGroupNodes": {
+    "label": "Separa i nodi del gruppo selezionato"
+  },
+  "Comfy_Help_AboutComfyUI": {
+    "label": "Apri Informazioni su ComfyUI"
+  },
+  "Comfy_Help_OpenComfyOrgDiscord": {
+    "label": "Apri Comfy-Org Discord"
+  },
+  "Comfy_Help_OpenComfyUIDocs": {
+    "label": "Apri la documentazione di ComfyUI"
+  },
+  "Comfy_Help_OpenComfyUIForum": {
+    "label": "Apri il forum ComfyUI"
+  },
+  "Comfy_Help_OpenComfyUIIssues": {
+    "label": "Apri Problemi ComfyUI"
+  },
+  "Comfy_Interrupt": {
+    "label": "Interrompi"
+  },
+  "Comfy_LoadDefaultWorkflow": {
+    "label": "Carica Flusso di Lavoro Predefinito"
+  },
+  "Comfy_Manager_CustomNodesManager": {
+    "label": "Gestore Nodi Personalizzati"
+  },
+  "Comfy_Manager_ToggleManagerProgressDialog": {
+    "label": "Attiva/Disattiva Finestra di Progresso"
+  },
+  "Comfy_NewBlankWorkflow": {
+    "label": "Nuovo flusso di lavoro vuoto"
+  },
+  "Comfy_OpenClipspace": {
+    "label": "Clipspace"
+  },
+  "Comfy_OpenWorkflow": {
+    "label": "Apri Workflow"
+  },
+  "Comfy_QueuePrompt": {
+    "label": "Coda Prompt"
+  },
+  "Comfy_QueuePromptFront": {
+    "label": "Metti in coda il prompt (Davanti)"
+  },
+  "Comfy_Redo": {
+    "label": "Ripeti"
+  },
+  "Comfy_RefreshNodeDefinitions": {
+    "label": "Aggiorna Definizioni dei Nodi"
+  },
+  "Comfy_SaveWorkflow": {
+    "label": "Salva Workflow"
+  },
+  "Comfy_SaveWorkflowAs": {
+    "label": "Salva flusso di lavoro come"
+  },
+  "Comfy_ShowSettingsDialog": {
+    "label": "Mostra finestra delle impostazioni"
+  },
+  "Comfy_ToggleTheme": {
+    "label": "Cambia Tema (Scuro/Chiaro)"
+  },
+  "Comfy_Undo": {
+    "label": "Annulla"
+  },
+  "Workspace_CloseWorkflow": {
+    "label": "Chiudi il flusso di lavoro corrente"
+  },
+  "Workspace_NextOpenedWorkflow": {
+    "label": "Prossimo Flusso di Lavoro Aperto"
+  },
+  "Workspace_PreviousOpenedWorkflow": {
+    "label": "Flusso di lavoro aperto in precedenza"
+  },
+  "Workspace_SearchBox_Toggle": {
+    "label": "Attiva/Disattiva Casella di Ricerca"
+  },
+  "Workspace_ToggleBottomPanel": {
+    "label": "Attiva/Disattiva Pannello Inferiore"
+  },
+  "Workspace_ToggleBottomPanelTab_command-terminal": {
+    "label": "Attiva/Disattiva Pannello Inferiore del Terminale"
+  },
+  "Workspace_ToggleBottomPanelTab_logs-terminal": {
+    "label": "Attiva/Disattiva Pannello Inferiore dei Log"
+  },
+  "Workspace_ToggleFocusMode": {
+    "label": "Attiva/Disattiva Modalità Fuoco"
+  },
+  "Workspace_ToggleSidebarTab_model-library": {
+    "label": "Attiva/Disattiva la barra laterale della libreria dei modelli",
+    "tooltip": "Libreria dei modelli"
+  },
+  "Workspace_ToggleSidebarTab_node-library": {
+    "label": "Attiva/Disattiva Libreria dei Nodi",
+    "tooltip": "Libreria dei Nodi"
+  },
+  "Workspace_ToggleSidebarTab_queue": {
+    "label": "Attiva/Disattiva Barra Laterale Coda",
+    "tooltip": "Coda"
+  },
+  "Workspace_ToggleSidebarTab_workflows": {
+    "label": "Attiva/Disattiva Barra Laterale dei Flussi di Lavoro",
+    "tooltip": "Flussi di Lavoro"
+  }
+}

@@ -28,7 +28,7 @@ module.exports = defineConfig({
   entry: 'src/locales/en.json', // Base language file
   entryLocale: 'en',
   output: 'src/locales',
-  outputLocales: ['zh', 'ru', 'ja', 'ko', 'fr'], // Add the new language(s) here
+  outputLocales: ['zh', 'ru', 'ja', 'ko', 'fr', 'it'], // Add the new language(s) here
 });
 ```
 

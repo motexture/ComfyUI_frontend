@@ -8,6 +8,10 @@ import frCommands from './locales/fr/commands.json'
 import fr from './locales/fr/main.json'
 import frNodes from './locales/fr/nodeDefs.json'
 import frSettings from './locales/fr/settings.json'
+import itCommands from './locales/it/commands.json'
+import it from './locales/it/main.json'
+import itNodes from './locales/it/nodeDefs.json'
+import itSettings from './locales/it/settings.json'
 import jaCommands from './locales/ja/commands.json'
 import ja from './locales/ja/main.json'
 import jaNodes from './locales/ja/nodeDefs.json'
@@ -40,14 +44,15 @@ const messages = {
   ru: buildLocale(ru, ruNodes, ruCommands, ruSettings),
   ja: buildLocale(ja, jaNodes, jaCommands, jaSettings),
   ko: buildLocale(ko, koNodes, koCommands, koSettings),
-  fr: buildLocale(fr, frNodes, frCommands, frSettings)
+  fr: buildLocale(fr, frNodes, frCommands, frSettings),
+  it: buildLocale(it, itNodes, itCommands, itSettings)
 }
 
 export const i18n = createI18n({
   // Must set `false`, as Vue I18n Legacy API is for Vue 2
   legacy: false,
-  locale: navigator.language.split('-')[0] || 'en',
-  fallbackLocale: 'en',
+  locale: 'it',
+  fallbackLocale: 'it',
   messages,
   // Ignore warnings for locale options as each option is in its own language.
   // e.g. "English", "中文", "Русский", "日本語", "한국어", "Français"

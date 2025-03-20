@@ -174,7 +174,7 @@ test.describe('Workflows sidebar', () => {
       api: false
     })
 
-    await comfyPage.setSetting('Comfy.Locale', 'zh')
+    await comfyPage.setSetting('Comfy.Locale', 'it')
     await comfyPage.setup()
 
     const downloadedContentZh = await comfyPage.getExportedWorkflow({
