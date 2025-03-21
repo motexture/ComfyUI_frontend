@@ -92,7 +92,11 @@ export const useCommandStore = defineStore('command', () => {
   ) => {
     const command = getCommand(commandId)
     if (command) {
-      await wrapWithErrorHandlingAsync(command.function, errorHandler)()
+      const result = await wrapWithErrorHandlingAsync(
+        command.function,
+        errorHandler
+      )()
+      return result
     } else {
       throw new Error(`Command ${commandId} not found`)
     }

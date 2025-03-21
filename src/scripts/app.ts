@@ -1315,7 +1315,7 @@ export class ComfyApp {
 
     this.#processingQueue = true
     this.lastNodeErrors = null
-
+    var hasFoundError = false
     try {
       while (this.#queueItems.length) {
         // @ts-expect-error fixme ts strict error
@@ -1333,6 +1333,7 @@ export class ComfyApp {
             this.lastNodeErrors = res.node_errors
             // @ts-expect-error fixme ts strict error
             if (this.lastNodeErrors.length > 0) {
+              hasFoundError = true
               this.canvas.draw(true, true)
             } else {
               try {
@@ -1343,9 +1344,12 @@ export class ComfyApp {
                   workflow: useWorkspaceStore().workflow
                     .activeWorkflow as ComfyWorkflow
                 })
-              } catch (error) {}
+              } catch (error) {
+                hasFoundError = true
+              }
             }
           } catch (error) {
+            hasFoundError = true
             const formattedError = this.#formatPromptError(error)
             this.ui.dialog.show(formattedError)
             // @ts-expect-error fixme ts strict error
@@ -1372,7 +1376,8 @@ export class ComfyApp {
       this.#processingQueue = false
     }
     api.dispatchCustomEvent('promptQueued', { number, batchCount })
-    return !this.lastNodeErrors
+    console.log(this.lastNodeErrors)
+    return hasFoundError
   }
 
   // @ts-expect-error fixme ts strict error

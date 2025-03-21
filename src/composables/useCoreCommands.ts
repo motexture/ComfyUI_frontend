@@ -292,7 +292,9 @@ export function useCoreCommands(): ComfyCommand[] {
       label: 'Queue Prompt',
       versionAdded: '1.3.7',
       function: async () => {
-        await app.queuePrompt(0, 1)
+        const result = await app.queuePrompt(0, 1)
+        console.log(result)
+        return result
       }
     },
     {

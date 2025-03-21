@@ -1,11 +1,11 @@
 <template>
-  <div class="queue-button-group flex">
+  <div class="queue-button-group flex items-center">
     <Button
       class="comfyui-queue-button"
-      :label="activeQueueModeMenuItem.label"
+      :label="buttonLabel"
       severity="primary"
       size="small"
-      :disabled="isLocallyProcessing"
+      :disabled="isExecuting || isOnQueue"
       @click="handleQueuePrompt"
       :model="queueModeMenuItems"
       data-testid="queue-button"
@@ -20,6 +20,7 @@
         <i-lucide:play v-if="queueMode === 'disabled'" />
       </template>
     </Button>
+    <!-- (Optional) Display your local queue count -->
   </div>
 </template>
 
@@ -31,18 +32,17 @@ import { useI18n } from 'vue-i18n'
 
 import { api } from '@/scripts/api'
 import { useCommandStore } from '@/stores/commandStore'
+import { useExecutionStore } from '@/stores/executionStore'
 import { useQueueSettingsStore } from '@/stores/queueStore'
 import { useWorkspaceStore } from '@/stores/workspaceStore'
 
-// adjust path as needed
-
-// Setup stores and i18n
 const workspaceStore = useWorkspaceStore()
 const { mode: queueMode } = storeToRefs(useQueueSettingsStore())
 const { t } = useI18n()
 const commandStore = useCommandStore()
+const executionStore = useExecutionStore()
 
-// Define menu item lookup (only the 'disabled' key is defined here)
+// Menu lookup (only "disabled" defined)
 const queueModeMenuItemLookup = computed(() => ({
   disabled: {
     key: 'disabled',
@@ -53,7 +53,6 @@ const queueModeMenuItemLookup = computed(() => ({
     }
   }
 }))
-
 const activeQueueModeMenuItem = computed(() => {
   const lookup = queueModeMenuItemLookup.value as Record<
     string,
@@ -61,69 +60,80 @@ const activeQueueModeMenuItem = computed(() => {
   >
   return lookup[queueMode.value] || lookup.disabled
 })
-
 const queueModeMenuItems = computed(() =>
   Object.values(queueModeMenuItemLookup.value)
 )
 
-// Local run state: true only after the button is clicked on this client
-const isLocallyProcessing = ref(false)
+// local queue count (only your tasks)
+const queueCount = ref(0)
+// Flag that keeps your button disabled until your own task is finished
+const isOnQueue = ref(false)
+// Global execution flag (from the execution store)
+const isExecuting = computed(() => !!executionStore.executingNodeId)
 
-// Polling interval handle; we'll start polling only when the client has initiated a run
+// Computed label:
+// - "In esecuzione" if execution is active,
+// - "In coda" if you have a queued task,
+// - Else the default menu label.
+const buttonLabel = computed(() => {
+  if (isExecuting.value) {
+    return 'In esecuzione'
+  } else if (queueCount.value > 0) {
+    return 'In coda'
+  } else {
+    return activeQueueModeMenuItem.value.label
+  }
+})
+
+// Polling interval handle
 let pollInterval: ReturnType<typeof setInterval> | null = null
 
-// Function to start polling the server's queue status
+// Helper: Count all tasks (non-local) in the API response without filtering by client_id.
+function getGlobalCount(info: { Running?: any[]; Pending?: any[] }): number {
+  const running = info.Running || []
+  const pending = info.Pending || []
+  return running.length + pending.length
+}
+
+// Poll your own queue status and only re-enable the button when your local count is zero and no execution is active.
 const startPollingQueueStatus = () => {
-  // Adjust the polling interval as needed (currently set to poll every 1 second)
   pollInterval = setInterval(async () => {
     try {
       const info = await api.getQueue()
-      // Check if both Running and Pending queues are empty
-      if (
-        (!info.Running || info.Running.length === 0) &&
-        (!info.Pending || info.Pending.length === 0)
-      ) {
-        isLocallyProcessing.value = false
-        if (pollInterval) {
-          clearInterval(pollInterval)
-          pollInterval = null
-        }
+      if (!isExecuting.value && isOnQueue.value) {
+        isOnQueue.value = true
+        queueCount.value = getGlobalCount(info) - 1
+      } else {
+        isOnQueue.value = false
+        queueCount.value = 0
       }
     } catch (error) {
       console.error('Error fetching queue status:', error)
     }
   }, 1000)
 }
+startPollingQueueStatus()
 
-// Function to execute the queue prompt command (i.e. add the job)
+// Execute the queue prompt command.
 const queuePrompt = async () => {
   const commandId = 'Comfy.QueuePrompt'
-  return commandStore.execute(commandId)
+  const result = await commandStore.execute(commandId)
+  console.log(result)
+  return result
 }
 
-// Handle button click: set local flag, add job, then start polling server state
+// When the button is clicked:
+// 1. Immediately disable the button and set queueCount to 1 so the label becomes "In coda".
+// 2. Execute the queue prompt command.
+// 3. Then start polling for updates.
 async function handleQueuePrompt() {
-  // Prevent multiple clicks if already processing locally
-  if (isLocallyProcessing.value) return
-  isLocallyProcessing.value = true
-
-  try {
-    // Execute the command to add to the queue
-    await queuePrompt()
-    // Start polling the server for pending/running jobs
-    startPollingQueueStatus()
-  } catch (error) {
-    console.error('Error executing queue prompt:', error)
-    // Reset local state and clear polling if there is an error
-    isLocallyProcessing.value = false
-    if (pollInterval) {
-      clearInterval(pollInterval)
-      pollInterval = null
-    }
+  isOnQueue.value = true
+  const error = await queuePrompt()
+  if (error) {
+    isOnQueue.value = false
   }
 }
 
-// Ensure polling is stopped if the component unmounts
 onUnmounted(() => {
   if (pollInterval) {
     clearInterval(pollInterval)
@@ -133,8 +143,12 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.comfyui-queue-button :deep(.p-splitbutton-dropdown) {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+.queue-count-badge {
+  background-color: #ff4d4f;
+  color: white;
+  border-radius: 50%;
+  padding: 0.2em 0.6em;
+  font-size: 0.8rem;
+  line-height: 1;
 }
 </style>
