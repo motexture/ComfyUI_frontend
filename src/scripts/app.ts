@@ -1309,10 +1309,8 @@ export class ComfyApp {
     // @ts-expect-error fixme ts strict error
     this.#queueItems.push({ number, batchCount })
 
-    // Only have one action process the items so each one gets a unique seed correctly
     if (this.#processingQueue) {
-      // @ts-expect-error fixme ts strict error
-      return
+      return Promise.resolve(false)
     }
 
     this.#processingQueue = true

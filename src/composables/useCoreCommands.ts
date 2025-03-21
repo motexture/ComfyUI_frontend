@@ -17,7 +17,7 @@ import { useLitegraphService } from '@/services/litegraphService'
 import { useWorkflowService } from '@/services/workflowService'
 import type { ComfyCommand } from '@/stores/commandStore'
 import { useTitleEditorStore } from '@/stores/graphStore'
-import { useQueueSettingsStore, useQueueStore } from '@/stores/queueStore'
+import { useQueueStore } from '@/stores/queueStore'
 import { useSettingStore } from '@/stores/settingStore'
 import { useToastStore } from '@/stores/toastStore'
 import { type ComfyWorkflow, useWorkflowStore } from '@/stores/workflowStore'
@@ -291,9 +291,8 @@ export function useCoreCommands(): ComfyCommand[] {
       icon: 'pi pi-play',
       label: 'Queue Prompt',
       versionAdded: '1.3.7',
-      function: () => {
-        const batchCount = useQueueSettingsStore().batchCount
-        app.queuePrompt(0, batchCount)
+      function: async () => {
+        await app.queuePrompt(0, 1)
       }
     },
     {

@@ -479,7 +479,7 @@
   },
   "menuLabels": {
     "About ComfyUI": "Informazioni su ComfyUI",
-    "Browse Templates": "Sfoglia Modelli",
+    "Browse Templates": "Sfoglia Templates",
     "Bypass/Unbypass Selected Nodes": "Bypassa/Annulla Bypass Nodi Selezionati",
     "Canvas Toggle Link Visibility": "Attiva/Disattiva Visibilità Collegamenti Canvas",
     "Canvas Toggle Lock": "Attiva/Disattiva Blocco Canvas",
@@ -820,10 +820,10 @@
     "Workflow": "Flusso di Lavoro"
   },
   "sideToolbar": {
-    "browseTemplates": "Sfoglia modelli di esempio",
+    "browseTemplates": "Sfoglia templates di esempio",
     "downloads": "Download",
     "logout": "Disconnetti",
-    "modelLibrary": "Libreria dei Modelli",
+    "modelLibrary": "Libreria dei templates",
     "newBlankWorkflow": "Crea un nuovo flusso di lavoro vuoto",
     "nodeLibrary": "Libreria dei Nodi",
     "nodeLibraryTab": {
@@ -892,9 +892,9 @@
         "stable_zero123_example": "Stable Zero123"
       },
       "Area Composition": {
-        "area_composition": "Composizione dell'Area",
-        "area_composition_reversed": "Composizione dell'Area Inversa",
-        "area_composition_square_area_for_subject": "Composizione dell'Area Quadrata per il Soggetto"
+        "area_composition": "Composizione Area",
+        "area_composition_reversed": "Composizione Area Inversa",
+        "area_composition_square_area_for_subject": "Composizione Area Quadrata per il Soggetto"
       },
       "Audio": {
         "stable_audio_example": "Stable Audio"
@@ -955,7 +955,7 @@
         "txt_to_image_to_video": "SVD Testo a Immagine a Video"
       }
     },
-    "title": "Inizia con un Modello"
+    "title": "Inizia con un template"
   },
   "userSelect": {
     "enterUsername": "Inserisci un nome utente",
